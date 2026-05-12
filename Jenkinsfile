@@ -29,7 +29,7 @@ pipeline {
 
         stage('4. Push Image to JFrog') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'jfrog-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+                withCredentials([usernamePassword(credentialsId: 'jfrog-cred', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
                     sh """
                         docker login ${JFROG_URL} -u ${USER} -p ${PASS}
                         docker push ${IMAGE}:${BUILD_NUMBER}
