@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hmrs-backend
+  namespace: hmrs
+  labels:
+    app: hmrs-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hmrs-backend
+  template:
+    metadata:
+      labels:
+        app: hmrs-backend
+    spec:
+      imagePullSecrets:
+        - name: jfrog-pull-secret
+      containers:
+        - name: hmrs-backend
+          image: trial5v4d48.jfrog.io/hmrs-docker/hmrs-app:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:h2:mem:testdb"
+            - name: SPRING_H2_CONSOLE_ENABLED
+              value: "true"
