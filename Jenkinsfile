@@ -8,7 +8,7 @@ pipeline {
 
     environment {
         JFROG_URL = "trial5v4d48.jfrog.io"
-        JFROG_REPO = "hmrs-docker"
+        JFROG_REPO = "docker-local"
         IMAGE = "${JFROG_URL}/${JFROG_REPO}/hmrs-app"
         K8S_EC2_IP = "13.220.155.90"
     }
@@ -29,7 +29,7 @@ pipeline {
 
         stage('4. Push Image to JFrog') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'jfrog-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+                withCredentials([usernamePassword(credentialsId: 'Jfrog_cred', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
                     sh """
                         docker login ${JFROG_URL} -u ${USER} -p ${PASS}
                         docker push ${IMAGE}:${BUILD_NUMBER}
