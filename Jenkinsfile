@@ -8,7 +8,7 @@ pipeline {
 
     environment {
         JFROG_URL = "trial5v4d48.jfrog.io"
-        JFROG_REPO = "hmrs-docker"
+        JFROG_REPO = "docker-local"
         IMAGE = "${JFROG_URL}/${JFROG_REPO}/hmrs-app"
         K8S_EC2_IP = "13.220.155.90"
     }
