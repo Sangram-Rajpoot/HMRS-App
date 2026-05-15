@@ -1,25 +1,21 @@
-name: Demo CICD Test
+# .github/workflows/runner-smoke-test.yaml
+name: runner-smoke-test
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
-  test-runner:
-    runs-on: self-hosted
+  verify:
+    runs-on: [self-hosted, linux, x64, k8s-runner]
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Run Basic Linux Commands
+      - name: Show runner details
         run: |
-          echo "Runner is working"
-          hostname
-          pwd
-          ls -la
-          mkdir demo-folder
-          cd demo-folder
-          touch test.txt
-          ls -la
+          echo "Hostname: $(hostname)"
+          whoami
+          kubectl version --client
+          helm version
+          aws --version
+          jf --version
