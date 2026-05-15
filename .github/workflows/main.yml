@@ -1,0 +1,25 @@
+name: Demo CICD Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-runner:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Basic Linux Commands
+        run: |
+          echo "Runner is working"
+          hostname
+          pwd
+          ls -la
+          mkdir demo-folder
+          cd demo-folder
+          touch test.txt
+          ls -la
